@@ -1,9 +1,20 @@
+import { FaGithub, FaPlus } from "react-icons/fa";
+import { Container, Form, SubmitButton } from "./styles";
+
 export default function Main() {
   return (
-    <>
-      <div>
-        <h1>Home</h1>
-      </div>
-    </>
+    <Container>
+      <h1>
+        <FaGithub size={25} color="white" />
+        Meus repositórios
+      </h1>
+
+      <Form onSubmit={() => {}}>
+        <input type="text" placeholder="Adicionar Repositório" />
+        <SubmitButton type="submit">
+          <FaPlus color="#FFF" size={14} />
+        </SubmitButton>
+      </Form>
+    </Container>
   );
 }
