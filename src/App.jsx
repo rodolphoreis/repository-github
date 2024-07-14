@@ -1,7 +1,9 @@
+import Rotas from "./routes";
+
 function App() {
   return (
     <>
-      <h1>Olá Mundo</h1>
+      <Rotas />
     </>
   );
 }
