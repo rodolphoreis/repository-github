@@ -20,11 +20,7 @@ export default function Main() {
         Meus repositórios
       </h1>
 
-      <Form
-        onSubmit={() => {
-          handleSubmit;
-        }}
-      >
+      <Form onSubmit={handleSubmit}>
         <input
           type="text"
           name="newRepo"
