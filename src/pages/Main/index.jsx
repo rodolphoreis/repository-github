@@ -1,6 +1,6 @@
 import { FaGithub, FaPlus } from "react-icons/fa";
 import { Container, Form, SubmitButton } from "./styles";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import api from "../../services/api";
 
@@ -12,9 +12,25 @@ export default function Main() {
     setNewRepo(event.target.value);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const submit = async () => {
+        const response = await api.get(`repos/${newRepo}`);
+
+        const data = {
+          name: response.data.full_name,
+        };
+
+        setRepositorios([...repositorios, data]);
+        setNewRepo("");
+      };
+
+      submit();
+    },
+    [newRepo, repositorios]
+  );
 
   return (
     <Container>
