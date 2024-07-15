@@ -9,6 +9,10 @@ export default function Main() {
     setNewRepo(event.target.value);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
   return (
     <Container>
       <h1>
@@ -16,7 +20,11 @@ export default function Main() {
         Meus repositórios
       </h1>
 
-      <Form onSubmit={() => {}}>
+      <Form
+        onSubmit={() => {
+          handleSubmit;
+        }}
+      >
         <input
           type="text"
           name="newRepo"
