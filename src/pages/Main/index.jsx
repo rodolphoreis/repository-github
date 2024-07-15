@@ -5,6 +5,10 @@ import { useState } from "react";
 export default function Main() {
   const [newRepo, setNewRepo] = useState("");
 
+  function handleInputChange(event) {
+    setNewRepo(event.target.value);
+  }
+
   return (
     <Container>
       <h1>
@@ -17,10 +21,10 @@ export default function Main() {
           type="text"
           name="newRepo"
           value={newRepo}
-          onChange={(event) => setNewRepo(event.target.value)}
+          onChange={handleInputChange}
           placeholder="Adicionar Repositório"
         />
-        <SubmitButton type="submit" style={{ background: "#0D2636" }}>
+        <SubmitButton style={{ background: "#0D2636" }}>
           <FaPlus size={14} color="white" />
         </SubmitButton>
       </Form>
