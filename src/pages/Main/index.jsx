@@ -6,6 +6,7 @@ import api from "../../services/api";
 
 export default function Main() {
   const [newRepo, setNewRepo] = useState("");
+  const [repositorios, setRepositorios] = useState([]);
 
   function handleInputChange(event) {
     setNewRepo(event.target.value);
