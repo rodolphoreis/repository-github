@@ -5,14 +5,14 @@ export default function Main() {
   return (
     <Container>
       <h1>
-        <FaGithub size={25} color="white" />
+        <FaGithub size={25} />
         Meus repositórios
       </h1>
 
       <Form onSubmit={() => {}}>
         <input type="text" placeholder="Adicionar Repositório" />
-        <SubmitButton type="submit">
-          <FaPlus color="#FFF" size={14} />
+        <SubmitButton type="submit" style={{ background: "#0D2636" }}>
+          <FaPlus size={14} color="white" />
         </SubmitButton>
       </Form>
     </Container>
