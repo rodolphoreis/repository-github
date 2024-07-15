@@ -1,4 +1,4 @@
-import { FaGithub, FaPlus } from "react-icons/fa";
+import { FaSpinner, FaGithub, FaPlus } from "react-icons/fa";
 import { Container, Form, SubmitButton } from "./styles";
 import { useCallback, useState } from "react";
 
@@ -56,8 +56,15 @@ export default function Main() {
           onChange={handleInputChange}
           placeholder="Adicionar Repositório"
         />
-        <SubmitButton style={{ background: "#0D2636" }}>
-          <FaPlus size={14} color="white" />
+        <SubmitButton
+          style={{ background: "#0D2636" }}
+          loading={loading ? 1 : 0}
+        >
+          {loading ? (
+            <FaSpinner size={14} color="#FFF" />
+          ) : (
+            <FaPlus size={14} color="#FFF" />
+          )}
         </SubmitButton>
       </Form>
     </Container>
