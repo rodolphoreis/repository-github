@@ -18,14 +18,22 @@ export default function Main() {
       event.preventDefault();
 
       const submit = async () => {
-        const response = await api.get(`repos/${newRepo}`);
+        setLoading(true);
+        try {
+          const response = await api.get(`repos/${newRepo}`);
 
-        const data = {
-          name: response.data.full_name,
-        };
+          const data = {
+            name: response.data.full_name,
+          };
 
-        setRepositorios([...repositorios, data]);
-        setNewRepo("");
+          setRepositorios([...repositorios, data]);
+          setNewRepo("");
+        } catch (error) {
+          console.error(error);
+          alert("Repositório não encontrado.");
+        } finally {
+          setLoading(false);
+        }
       };
 
       submit();
