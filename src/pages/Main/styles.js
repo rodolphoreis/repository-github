@@ -35,7 +35,6 @@ export const Form = styled.form`
 `;
 
 export const SubmitButton = styled.button`
-  background: "#0D2636";
   border: 0;
   border-radius: 4px;
   margin-left: 10px;
