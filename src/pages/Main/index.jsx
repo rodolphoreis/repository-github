@@ -20,6 +20,11 @@ export default function Main() {
       const submit = async () => {
         setLoading(true);
         try {
+          if (newRepo === "") {
+            setLoading(false);
+            return alert("Você precisa indicar um repositório!");
+          }
+
           const response = await api.get(`repos/${newRepo}`);
 
           const data = {
@@ -31,6 +36,7 @@ export default function Main() {
         } catch (error) {
           console.error(error);
           alert("Repositório não encontrado.");
+          setNewRepo("");
         } finally {
           setLoading(false);
         }
