@@ -8,9 +8,11 @@ export default function Main() {
   const [newRepo, setNewRepo] = useState("");
   const [repositorios, setRepositorios] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
 
   function handleInputChange(event) {
     setNewRepo(event.target.value);
+    setAlert(null);
   }
 
   const handleSubmit = useCallback(
@@ -19,6 +21,7 @@ export default function Main() {
 
       const submit = async () => {
         setLoading(true);
+        setAlert(null);
         try {
           if (newRepo === "") {
             setLoading(false);
@@ -30,8 +33,7 @@ export default function Main() {
           const hasRepo = repositorios.find((repo) => repo.name === newRepo);
 
           if (hasRepo) {
-            alert("Repositório já adicionado!");
-            return;
+            throw new Error("Este repositório já foi cadastrado!");
           }
 
           const data = {
@@ -41,8 +43,7 @@ export default function Main() {
           setRepositorios([...repositorios, data]);
           setNewRepo("");
         } catch (error) {
-          console.error(error);
-          alert("Repositório não encontrado.");
+          setAlert(true);
           setNewRepo("");
         } finally {
           setLoading(false);
@@ -51,7 +52,7 @@ export default function Main() {
 
       submit();
     },
-    [newRepo, repositorios]
+    [newRepo, repositorios, alert]
   );
 
   const handleDelete = useCallback(
@@ -69,7 +70,7 @@ export default function Main() {
         Meus repositórios
       </h1>
 
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} error={alert}>
         <input
           type="text"
           name="newRepo"
