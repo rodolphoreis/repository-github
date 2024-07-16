@@ -27,6 +27,13 @@ export default function Main() {
 
           const response = await api.get(`repos/${newRepo}`);
 
+          const hasRepo = repositorios.find((repo) => repo.name === newRepo);
+
+          if (hasRepo) {
+            alert("Repositório já adicionado!");
+            return;
+          }
+
           const data = {
             name: response.data.full_name,
           };
