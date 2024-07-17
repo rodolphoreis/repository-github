@@ -2,6 +2,9 @@ import { FaSpinner, FaGithub, FaPlus, FaBars, FaTrash } from "react-icons/fa";
 import { Container, Form, SubmitButton, List, DeleteButton } from "./styles";
 import { useCallback, useState } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import api from "../../services/api";
 
 export default function Main() {
