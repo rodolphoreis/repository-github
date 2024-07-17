@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import { Container } from "./styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 
 export default function Repositorio() {
   const { repositorio } = useParams();
+
+  const [repo, setRepo] = useState({});
+  const [issues, setIssues] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
@@ -17,6 +21,9 @@ export default function Repositorio() {
           },
         }),
       ]);
+      setRepo(repositoriosData.data);
+      setIssues(issuesData.data);
+      setLoading(false);
     }
     load();
   }, [repositorio]);
