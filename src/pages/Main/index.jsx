@@ -11,11 +11,17 @@ export default function Main() {
   const [newRepo, setNewRepo] = useState("");
   const [repositorios, setRepositorios] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(null);
+
+  const errorHasRepo = () => toast.error("Repositório já existente!");
+  const errorWriteRepo = () =>
+    toast.info("Você precisa indicar um repositório!");
+
+  const success = () => toast.success("Repositório cadastrado!");
+
+  const notifyDelete = () => toast.warning("Repositório excluido!");
 
   function handleInputChange(event) {
     setNewRepo(event.target.value);
-    setAlert(null);
   }
 
   const handleSubmit = useCallback(
@@ -24,11 +30,11 @@ export default function Main() {
 
       const submit = async () => {
         setLoading(true);
-        setAlert(null);
+
         try {
           if (newRepo === "") {
             setLoading(false);
-            return alert("Você precisa indicar um repositório!");
+            return errorWriteRepo();
           }
 
           const response = await api.get(`repos/${newRepo}`);
@@ -36,7 +42,8 @@ export default function Main() {
           const hasRepo = repositorios.find((repo) => repo.name === newRepo);
 
           if (hasRepo) {
-            throw new Error("Este repositório já foi cadastrado!");
+            setLoading(false);
+            return errorHasRepo();
           }
 
           const data = {
@@ -45,8 +52,8 @@ export default function Main() {
 
           setRepositorios([...repositorios, data]);
           setNewRepo("");
+          success();
         } catch (error) {
-          setAlert(true);
           setNewRepo("");
         } finally {
           setLoading(false);
@@ -55,13 +62,14 @@ export default function Main() {
 
       submit();
     },
-    [newRepo, repositorios, alert]
+    [newRepo, repositorios]
   );
 
   const handleDelete = useCallback(
     (repo) => {
       const find = repositorios.filter((r) => r.name !== repo);
       setRepositorios(find);
+      notifyDelete();
     },
     [repositorios]
   );
@@ -73,7 +81,7 @@ export default function Main() {
         Meus repositórios
       </h1>
 
-      <Form onSubmit={handleSubmit} error={alert}>
+      <Form onSubmit={handleSubmit}>
         <input
           type="text"
           name="newRepo"
@@ -108,6 +116,7 @@ export default function Main() {
           </li>
         ))}
       </List>
+      <ToastContainer />
     </Container>
   );
 }
