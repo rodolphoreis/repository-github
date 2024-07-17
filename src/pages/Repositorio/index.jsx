@@ -5,7 +5,7 @@ export default function Repositorio() {
   return (
     <>
       <div>
-        <h1>Repositorio {repositorio}</h1>
+        <h1 style={{ color: "white" }}>Repositorio {repositorio}</h1>
       </div>
     </>
   );
