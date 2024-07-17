@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 
 export default function Main() {
   const [newRepo, setNewRepo] = useState("");
@@ -126,9 +127,9 @@ export default function Main() {
               </DeleteButton>
               {repo.name}
             </span>
-            <a href="#">
+            <Link to={`/repositorio/${encodeURIComponent(repo.name)}`}>
               <FaBars size={20} />
-            </a>
+            </Link>
           </li>
         ))}
       </List>
