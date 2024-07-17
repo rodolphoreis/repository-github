@@ -1,6 +1,6 @@
 import { FaSpinner, FaGithub, FaPlus, FaBars, FaTrash } from "react-icons/fa";
 import { Container, Form, SubmitButton, List, DeleteButton } from "./styles";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,22 @@ export default function Main() {
   const [newRepo, setNewRepo] = useState("");
   const [repositorios, setRepositorios] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Buscar
+  useEffect(() => {
+    const repoString = localStorage.getItem("repos");
+
+    if (repoString) {
+      setRepositorios(JSON.parse(repoString));
+    }
+  }, []);
+
+  // Salvar
+  useEffect(() => {
+    if (repositorios.length > 0) {
+      localStorage.setItem("repos", JSON.stringify(repositorios));
+    }
+  }, [repositorios]);
 
   const errorHasRepo = () => toast.error("Repositório já existente!");
   const errorWriteRepo = () =>
