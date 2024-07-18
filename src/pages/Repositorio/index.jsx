@@ -29,9 +29,14 @@ export default function Repositorio() {
   }, [repositorio]);
   if (loading) {
     return (
-      <Loading>
-        <h1>Carregando...</h1>
-      </Loading>
+      <BackButtonLoading>
+        <BackButton to="/">
+          <FaArrowLeft size={20} color="white" />
+        </BackButton>
+        <Loading>
+          <h1>Carregando...</h1>
+        </Loading>
+      </BackButtonLoading>
     );
   }
 
