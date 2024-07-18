@@ -5,6 +5,7 @@ import {
   Loading,
   BackButton,
   BackButtonLoading,
+} from "./styles";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { FaArrowLeft } from "react-icons/fa";
