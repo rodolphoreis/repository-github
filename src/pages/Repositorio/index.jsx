@@ -7,6 +7,7 @@ import {
   BackButtonLoading,
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function Repositorio() {
   const { repositorio } = useParams();
