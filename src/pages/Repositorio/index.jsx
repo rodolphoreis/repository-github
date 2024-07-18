@@ -5,6 +5,7 @@ import {
   Loading,
   BackButton,
   BackButtonLoading,
+  IssuesList,
 } from "./styles";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -34,6 +35,7 @@ export default function Repositorio() {
     }
     load();
   }, [repositorio]);
+
   if (loading) {
     return (
       <BackButtonLoading>
@@ -60,6 +62,33 @@ export default function Repositorio() {
           Acessar Repositório
         </Link>
       </Owner>
+
+      <IssuesList>
+        {issues &&
+          issues.map((issue) => (
+            <li key={String(issue.id)}>
+              <img src={issue.user.avatar_url} alt={issue.user.login} />
+
+              <div>
+                <strong>
+                  <a href={issue.html_url} alt={issue.title}>
+                    {issue.title}{" "}
+                  </a>
+
+                  {issues.labels.map((label) => (
+                    <span
+                      key={String(label.id)}
+                      style={{ backgroundColor: label.color }}
+                    >
+                      {label.name}
+                    </span>
+                  ))}
+                </strong>
+                <p>{issue.user.login}</p>
+              </div>
+            </li>
+          ))}
+      </IssuesList>
     </Container>
   );
 }
