@@ -37,7 +37,17 @@ export default function Repositorio() {
 
   return (
     <Container>
-      <h1 style={{ color: "white" }}>{repositorio}</h1>
+      <BackButton to="/">
+        <FaArrowLeft size={20} />
+      </BackButton>
+      <Owner>
+        <img src={repo.owner.avatar_url} alt={repo.owner.login} />
+        <h1>{repo.name}</h1>
+        <p>{repo.description}</p>
+        <Link to={repo.html_url} target="_blank" rel="noopener noreferrer">
+          Acessar Repositório
+        </Link>
+      </Owner>
     </Container>
   );
 }
