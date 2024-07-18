@@ -27,6 +27,13 @@ export default function Repositorio() {
     }
     load();
   }, [repositorio]);
+  if (loading) {
+    return (
+      <Loading>
+        <h1>Carregando...</h1>
+      </Loading>
+    );
+  }
 
   return (
     <Container>
