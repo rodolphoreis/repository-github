@@ -1,5 +1,9 @@
-import { useParams } from "react-router-dom";
-import { Container } from "./styles";
+import {
+  Container,
+  Owner,
+  Loading,
+  BackButton,
+  BackButtonLoading,
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
