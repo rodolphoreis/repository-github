@@ -58,36 +58,35 @@ export default function Repositorio() {
         <img src={repo.owner.avatar_url} alt={repo.owner.login} />
         <h1>{repo.name}</h1>
         <p>{repo.description}</p>
-        <Link to={repo.html_url} target="_blank" rel="noopener noreferrer">
+        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
           Acessar Repositório
-        </Link>
+        </a>
       </Owner>
 
       <IssuesList>
-        {issues &&
-          issues.map((issue) => (
-            <li key={String(issue.id)}>
-              <img src={issue.user.avatar_url} alt={issue.user.login} />
+        {issues.map((issue) => (
+          <li key={String(issue.id)}>
+            <img src={issue.user.avatar_url} alt={issue.user.login} />
 
-              <div>
-                <strong>
-                  <a href={issue.html_url} alt={issue.title}>
-                    {issue.title}{" "}
-                  </a>
+            <div>
+              <strong>
+                <a href={issue.html_url} alt={issue.title}>
+                  {issue.title}{" "}
+                </a>
 
-                  {issues.labels.map((label) => (
-                    <span
-                      key={String(label.id)}
-                      style={{ backgroundColor: label.color }}
-                    >
-                      {label.name}
-                    </span>
-                  ))}
-                </strong>
-                <p>{issue.user.login}</p>
-              </div>
-            </li>
-          ))}
+                {issue.labels.map((label) => (
+                  <span
+                    key={String(label.id)}
+                    style={{ backgroundColor: label.color }}
+                  >
+                    {label.name}
+                  </span>
+                ))}
+              </strong>
+              <p>{issue.user.login}</p>
+            </div>
+          </li>
+        ))}
       </IssuesList>
     </Container>
   );
