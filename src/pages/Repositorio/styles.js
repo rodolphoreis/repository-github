@@ -59,6 +59,21 @@ export const Owner = styled.header`
     text-align: center;
     color: #000;
   }
+
+  a {
+    color: #0d2636;
+    font-weight: bolder;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #000;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+    }
+  }
 `;
 
 export const BackButton = styled(Link)`
