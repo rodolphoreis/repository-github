@@ -154,5 +154,36 @@ export const PageActions = styled.div`
     &:hover {
       background: #0071db;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+`;
+
+export const FilterList = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+
+  button {
+    border: 0;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+    background: gray;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #0d2636;
+    }
+
+    &:nth-child(${(props) => props.active + 1}) {
+      background: #0071db;
+      color: #fff;
+    }
   }
 `;

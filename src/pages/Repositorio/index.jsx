@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import {
   Container,
@@ -7,6 +8,7 @@ import {
   BackButtonLoading,
   IssuesList,
   PageActions,
+  FilterList,
 } from "./styles";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -19,6 +21,24 @@ export default function Repositorio() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState([
+    {
+      label: "Todas",
+      state: "all",
+      active: true,
+    },
+    {
+      label: "Abertas",
+      state: "open",
+      active: false,
+    },
+    {
+      label: "Fechadas",
+      state: "closed",
+      active: false,
+    },
+  ]);
+  const [filterIndex, setFilterIndex] = useState(0);
 
   useEffect(() => {
     async function load() {
@@ -26,7 +46,7 @@ export default function Repositorio() {
         api.get(`repos/${repositorio}`),
         api.get(`repos/${repositorio}/issues`, {
           params: {
-            state: "open",
+            state: filters.find((filter) => filter.active).state,
             per_page: 5,
           },
         }),
@@ -36,7 +56,21 @@ export default function Repositorio() {
       setLoading(false);
     }
     load();
-  }, [repositorio]);
+  }, [repositorio, filters]);
+
+  useEffect(() => {
+    async function loadIssue() {
+      const response = await api.get(`repos/${repositorio}/issues`, {
+        params: {
+          state: filters[filterIndex].state,
+          per_page: 5,
+          page,
+        },
+      });
+      setIssues(response.data);
+    }
+    loadIssue();
+  }, [page, repositorio, filterIndex, filters]);
 
   function handlePage(action) {
     if (action === "back") {
@@ -45,7 +79,11 @@ export default function Repositorio() {
       setPage(page + 1);
     }
   }
-  console.log(page);
+
+  function handleFilter(index) {
+    setFilterIndex(index);
+  }
+
   if (loading) {
     return (
       <BackButtonLoading>
@@ -73,6 +111,18 @@ export default function Repositorio() {
         </a>
       </Owner>
 
+      <FilterList active={filterIndex}>
+        {filters.map((filter, index) => (
+          <button
+            key={filter.label}
+            type="button"
+            onClick={() => handleFilter(index)}
+          >
+            {filter.label}
+          </button>
+        ))}
+      </FilterList>
+
       <IssuesList>
         {issues.map((issue) => (
           <li key={String(issue.id)}>
@@ -99,7 +149,11 @@ export default function Repositorio() {
         ))}
       </IssuesList>
       <PageActions>
-        <button type="button" onClick={() => handlePage("back")}>
+        <button
+          type="button"
+          onClick={() => handlePage("back")}
+          disabled={page < 2}
+        >
           Voltar
         </button>
         <button type="button" onClick={() => handlePage("next")}>
