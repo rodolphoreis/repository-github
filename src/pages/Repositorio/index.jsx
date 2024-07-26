@@ -38,6 +38,14 @@ export default function Repositorio() {
     load();
   }, [repositorio]);
 
+  function handlePage(action) {
+    if (action === "back") {
+      setPage(page - 1);
+    } else if (action === "next") {
+      setPage(page + 1);
+    }
+  }
+  console.log(page);
   if (loading) {
     return (
       <BackButtonLoading>
@@ -91,10 +99,10 @@ export default function Repositorio() {
         ))}
       </IssuesList>
       <PageActions>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => handlePage("back")}>
           Voltar
         </button>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => handlePage("next")}>
           Proxima
         </button>
       </PageActions>
