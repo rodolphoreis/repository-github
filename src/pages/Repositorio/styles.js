@@ -136,3 +136,23 @@ export const IssuesList = styled.ul`
     }
   }
 `;
+
+export const PageActions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    border: 0;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #fff;
+    background: #0d2636;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #0071db;
+    }
+  }
+`;
