@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Owner,
@@ -89,6 +89,14 @@ export default function Repositorio() {
           </li>
         ))}
       </IssuesList>
+      <PageActions>
+        <button type="button" onClick={() => {}}>
+          Voltar
+        </button>
+        <button type="button" onClick={() => {}}>
+          Proxima
+        </button>
+      </PageActions>
     </Container>
   );
 }
