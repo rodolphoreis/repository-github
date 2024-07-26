@@ -6,6 +6,7 @@ import {
   BackButton,
   BackButtonLoading,
   IssuesList,
+  PageActions,
 } from "./styles";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
